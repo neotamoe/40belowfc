@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { Link } from 'react-router-dom';
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
       </div>
 
       <ul className="header">
-        <li><a href="/">Home</a></li>
-        <li><a href="/stuff">Stuff</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/roster">Roster</Link></li>
+        <li><Link to="/stats">Stats</Link></li>
       </ul>
       <div className="content" style={{border: 'blue 1px solid'}}>
           <p>Content to go here</p>
