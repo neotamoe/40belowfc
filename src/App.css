@@ -10,3 +10,8 @@ h1 {
   display: inline;
   vertical-align: center;
 }
+
+table, tr, th, td {
+  border-collapse: collapse;
+  border: 1px solid black;
+}

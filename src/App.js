@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
+import Roster from './Roster';
+import Stats from './Stats';
 
 function App() {
   return (
@@ -16,9 +18,13 @@ function App() {
         <li><Link to="/stats">Stats</Link></li>
       </ul>
       <div className="content" style={{border: 'blue 1px solid'}}>
-          <p>Content to go here</p>
+        <Switch>
+          {/* <Route exact path='/' component={Home}/> */}
+          <Route path='/roster' component={Roster}/>
+          <Route path='/stats' component={Stats}/>
+        </Switch>
       </div>
-      <div style={{border: 'purple 1px solid', marginTop: '50px'}}>
+      <div style={{border: 'purple 1px solid', marginTop: '250px'}}>
         <h3>PLANNING (this will disappear later):</h3>
         <ul>
           <li>navbar</li>
