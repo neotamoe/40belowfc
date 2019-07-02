@@ -17,7 +17,7 @@ function App() {
         <li><Link to="/roster">Roster</Link></li>
         <li><Link to="/stats">Stats</Link></li>
       </ul>
-      <div className="content" style={{border: 'blue 1px solid'}}>
+      <div className="content">
         <Switch>
           {/* <Route exact path='/' component={Home}/> */}
           <Route path='/roster' component={Roster}/>
