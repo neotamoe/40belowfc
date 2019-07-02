@@ -21,7 +21,7 @@ class Roster extends Component {
         players: []
     }
     componentWillMount(){
-        fetch('http://localhost:8080/players')
+        fetch('http://localhost:8080/players/current')
             .then(response => response.json()
             .then(res => {
                 let playersSorted = res.sort((a, b) => { return (a.last_name < b.last_name) ? -1 : ((a.last_name > b.last_name) ? 1 : 0) });
