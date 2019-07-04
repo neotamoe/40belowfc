@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import RosterTable from './components/RosterTable'
+import RosterTable from './RosterTable'
 
 
-class Roster extends Component {
+class CurrentRoster extends Component {
     state = {
         players: []
     }
@@ -29,4 +29,4 @@ class Roster extends Component {
     }
 }
 
-export default Roster;
+export default CurrentRoster;

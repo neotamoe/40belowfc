@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import { Link, Switch, Route } from 'react-router-dom';
-import Roster from './Roster';
+import CurrentRoster from './components/CurrentRoster';
+import FormerRoster from './components/FormerRoster';
 import Stats from './Stats';
 
 function App() {
@@ -14,13 +15,15 @@ function App() {
 
       <ul className="header">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/roster">Roster</Link></li>
+        <li><Link to="/roster">Current Roster</Link></li>
+        <li><Link to="/roster/former">Former Roster</Link></li>
         <li><Link to="/stats">Stats</Link></li>
       </ul>
       <div className="content">
         <Switch>
           {/* <Route exact path='/' component={Home}/> */}
-          <Route path='/roster' component={Roster}/>
+          <Route path='/roster/former' component={FormerRoster}/>
+          <Route path='/roster' component={CurrentRoster}/>
           <Route path='/stats' component={Stats}/>
         </Switch>
       </div>
