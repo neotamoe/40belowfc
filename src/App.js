@@ -12,13 +12,14 @@ function App() {
         <img src="/assets/images/crest2stars.png" alt="team crest"></img>
         <h1>40 Below FC</h1>
       </div>
-
-      <ul className="header">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/roster">Current Roster</Link></li>
-        <li><Link to="/roster/former">Former Roster</Link></li>
-        <li><Link to="/stats">Stats</Link></li>
-      </ul>
+      <navbar>
+        <ul className="header">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/roster">Current Roster</Link></li>
+          <li><Link to="/roster/former">Former Roster</Link></li>
+          <li><Link to="/stats">Stats</Link></li>
+        </ul>
+      </navbar>
       <div className="content">
         <Switch>
           {/* <Route exact path='/' component={Home}/> */}
