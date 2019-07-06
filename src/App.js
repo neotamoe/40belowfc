@@ -8,10 +8,12 @@ import Stats from './Stats';
 function App() {
   return (
     <div>
-      <div className="App">
+      <div id="myHeading">
         <img src="/assets/images/crest2stars.png" alt="team crest"></img>
-        <h1>40 Below FC</h1>
+        <h1 className="App" >40 Below FC</h1>
       </div>
+      <div>
+
       <navbar>
         <ul className="header">
           <li><Link to="/">Home</Link></li>
@@ -20,6 +22,7 @@ function App() {
           <li><Link to="/stats">Stats</Link></li>
         </ul>
       </navbar>
+      </div>
       <div className="content">
         <Switch>
           {/* <Route exact path='/' component={Home}/> */}
