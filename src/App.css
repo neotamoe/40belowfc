@@ -2,11 +2,10 @@
   text-align: center;
   line-height: 200px;
   height:200px;
-  border:1px solid yellow;
   margin: 0;
 }
 
-#myHeading img {
+#main-heading img {
   float:left;
   margin-left: 25px;
   position: relative;
@@ -14,6 +13,10 @@
 
 img {
   height: 200px;
+}
+
+.content {
+  margin: 25px;
 }
 
 table, tr, th, td {
@@ -25,7 +28,6 @@ navbar > ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  position: fixed;
   overflow: hidden;
   background-color: #699ac1;
   width: 100%;
