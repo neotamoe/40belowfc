@@ -35,7 +35,6 @@ navbar > ul {
 
 navbar > ul > li {
   display: inline;
-  float: left;
 }
 
 navbar > ul > li > a {
