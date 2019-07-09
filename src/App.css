@@ -24,7 +24,7 @@ table, tr, th, td {
   border: 1px solid black;
 }
 
-navbar > ul {
+nav > ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -33,12 +33,12 @@ navbar > ul {
   width: 100%;
 }
 
-navbar > ul > li {
+nav > ul > li {
   display: inline;
   float: left;
 }
 
-navbar > ul > li > a {
+nav > ul > li > a {
   text-decoration: none;
   display: block;
   color: white;

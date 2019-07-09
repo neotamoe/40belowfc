@@ -11,14 +11,14 @@ function App() {
       <div id="main-heading">
         <img src="/assets/images/crest2stars.png" alt="team crest"></img>
         <h1 className="App" >40 Below FC</h1>
-        <navbar>
+        <nav>
           <ul className="header">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/roster">Current Roster</Link></li>
             <li><Link to="/roster/former">Former Roster</Link></li>
             <li><Link to="/stats">Stats</Link></li>
           </ul>
-        </navbar>      
+        </nav>      
       </div>
       <div className="content">
         <Switch>
