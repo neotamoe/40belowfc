@@ -25,10 +25,10 @@ class Stats extends Component {
     fetch('http://localhost:8080/games')
         .then(response => response.json()
         .then(res => {
-          console.log(res);
-            // let playersSorted = res.sort((a, b) => { return (a.last_name < b.last_name) ? -1 : ((a.last_name > b.last_name) ? 1 : 0) });
+          // console.log(res);
+            let gamesSorted = res.sort((a, b) => { return b.season.id - a.season.id || b.game_order - a.game_order});
             this.setState({
-                games: res
+                games: gamesSorted
             })
         }))
 }
@@ -38,7 +38,7 @@ class Stats extends Component {
       ? this.state.games.map(game => 
         <tr key={game.id}>
           <td style={styles.cell}>{game.date[1]}-{game.date[2]}-{game.date[0]}</td>
-          <td style={styles.cell}>{game.time[0]}:{game.time[1]}</td>
+          <td style={styles.cell}>{game.time[0]}:{game.time[1] == 0 ? "00" : game.time[1]}</td>
           <td style={styles.cell}>{game.score_us}</td>
           <td style={styles.cell}>{game.opponent.team_name}</td>
           <td style={styles.cell}>{game.score_them}</td>
