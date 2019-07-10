@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Link, Switch, Route } from 'react-router-dom';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import CurrentRoster from './components/CurrentRoster';
 import FormerRoster from './components/FormerRoster';
 import Stats from './Stats';
@@ -13,10 +13,10 @@ function App() {
         <h1 className="App" >40 Below FC</h1>
         <nav>
           <ul className="header">
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/roster">Current Roster</Link></li>
-            <li><Link to="/roster/former">Former Roster</Link></li>
-            <li><Link to="/stats">Stats</Link></li>
+            <li><NavLink exact={true} to="/">Home</NavLink></li>
+            <li><NavLink to="/roster">Current Roster</NavLink></li>
+            <li><NavLink to="/roster/former">Former Roster</NavLink></li>
+            <li><NavLink to="/stats">Stats</NavLink></li>
           </ul>
         </nav>      
       </div>
