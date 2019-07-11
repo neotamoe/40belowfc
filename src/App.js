@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <div id="main-heading">
-        <img src="/assets/images/crest2stars.png" alt="team crest"></img>
+        <img src="/assets/images/ThreeStars.png" alt="team crest"></img>
         <h1 className="App" >40 Below FC</h1>
         <nav>
           <ul className="header">
