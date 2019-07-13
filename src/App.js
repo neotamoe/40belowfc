@@ -3,7 +3,8 @@ import './App.css';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import CurrentRoster from './components/CurrentRoster';
 import FormerRoster from './components/FormerRoster';
-import Stats from './Stats';
+import Stats from './components/Stats';
+import Gallery from './components/Gallery';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <li><NavLink to="/roster">Current Roster</NavLink></li>
             <li><NavLink to="/roster/former">Former Roster</NavLink></li>
             <li><NavLink to="/stats">Stats</NavLink></li>
+            <li><NavLink to="/gallery">Gallery</NavLink></li>
           </ul>
         </nav>      
       </div>
@@ -26,6 +28,7 @@ function App() {
           <Route path='/roster/former' component={FormerRoster}/>
           <Route path='/roster' component={CurrentRoster}/>
           <Route path='/stats' component={Stats}/>
+          <Route path='/gallery' component={Gallery}/>
         </Switch>
       </div>
       <div style={{border: 'purple 1px solid', marginTop: '250px'}}>
