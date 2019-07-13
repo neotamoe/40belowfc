@@ -10,16 +10,32 @@ class Gallery extends Component {
  
     const images = [
       {
-        original: 'http://lorempixel.com/1000/600/nature/1/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/1/',
+        original: '/assets/images/80th_game.jpg',
+        thumbnail: '/assets/images/80th_gamethumbnail.png',
       },
       {
-        original: 'http://lorempixel.com/1000/600/nature/2/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/2/'
+        original: '/assets/images/81st_game.jpg',
+        thumbnail: '/assets/images/81st_gamethumbnail.png'
       },
       {
-        original: 'http://lorempixel.com/1000/600/nature/3/',
-        thumbnail: 'http://lorempixel.com/250/150/nature/3/'
+        original: '/assets/images/2014_champions.jpg',
+        thumbnail: '/assets/images/2014_championsthumbnail.png'
+      },
+      {
+        original: '/assets/images/champions.jpg',
+        thumbnail: '/assets/images/championsthumbnail.png'
+      },
+      {
+        original: '/assets/images/fall2009.jpg',
+        thumbnail: '/assets/images/fall2009thumbnail.png'
+      },
+      {
+        original: '/assets/images/summer2008.jpg',
+        thumbnail: '/assets/images/summer2008thumbnail.png'
+      },
+      {
+        original: '/assets/images/summer2009.jpg',
+        thumbnail: '/assets/images/summer2009thumbnail.png'
       }
     ]
  

@@ -56,17 +56,24 @@ li a:hover {
 }
 
 .image-gallery-image {
-  height: 500px;
-  width: 100%;
+  height: auto;
+  width: 70%;
+}
+
+.image-gallery-image {
+  margin: 0 auto; 
 }
 
 .image-gallery-thumbnail img {
   height: auto;
 }
 
+.image-gallery-slide {
+  margin: 0 auto; 
+}
+
 .image-gallery-slide img {
   height: auto;
-  margin-bottom: 25px;
 }
 
 .image-gallery-thumbnails-container {
