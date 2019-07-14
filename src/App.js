@@ -5,6 +5,7 @@ import CurrentRoster from './components/CurrentRoster';
 import FormerRoster from './components/FormerRoster';
 import Stats from './components/Stats';
 import Gallery from './components/Gallery';
+import Admin from './components/Admin';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <li><NavLink to="/roster/former">Former Roster</NavLink></li>
             <li><NavLink to="/stats">Stats</NavLink></li>
             <li><NavLink to="/gallery">Gallery</NavLink></li>
+            <li><NavLink to="/admin">Admin</NavLink></li>
           </ul>
         </nav>      
       </div>
@@ -29,6 +31,7 @@ function App() {
           <Route path='/roster' component={CurrentRoster}/>
           <Route path='/stats' component={Stats}/>
           <Route path='/gallery' component={Gallery}/>
+          <Route path='/admin' component={Admin}/>
         </Switch>
       </div>
       <div style={{border: 'purple 1px solid', marginTop: '250px'}}>
