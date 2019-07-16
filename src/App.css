@@ -79,3 +79,25 @@ li a:hover {
 .image-gallery-thumbnails-container {
   padding-top: 15px;
 }
+
+/* set wrapper around grid to fix height -- this will need to be reworked */
+.admin-grid {
+  height: 175px;
+}
+
+/* override default styles -- this will need to be reworked */
+.react-grid-Main{
+  height: 100%;
+  }
+  
+  .react-grid-Container{
+  height: 100%;
+  }
+  
+  .react-grid-Grid{
+  min-height: 100% !important;
+  }
+  
+  .react-grid-Canvas{
+  height: 100% !important;
+  }
