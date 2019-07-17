@@ -20,7 +20,7 @@ class Admin extends Component {
     }
 
     handleSubmit(event) {
-        alert('A data type was submitted: ' + this.state.type);
+        // alert('A data type was submitted: ' + this.state.type);
         event.preventDefault();
         fetch('http://localhost:8080/' + this.state.type)
             .then(response =>  response.json())
@@ -29,27 +29,30 @@ class Admin extends Component {
                 console.log(Object.keys(results[0]))
                 this.setState({
                     formFields: Object.keys(results[0]),
-                    data: results
                 })
             });
     }
 
     render() {
-        const columns = this.state.formFields ?
-        this.state.formFields.map(field => ({ key: field, name: field })) : [];
-        // [
-        //     { key: 'id', name: 'ID' },
-        //     { key: 'title', name: 'Title' },
-        //     { key: 'count', name: 'Count' } ];
-          
-        const rows = this.state.data ? this.state.data : [];
-        console.log("data.length: ", this.state.data ? this.state.data.length : "none")
-        const rowsCount = this.state.data ? this.state.data.length : 0;
-        const dataGrid = (this.state.formFields && this.state.data) ? <div className="admin-grid"><ReactDataGrid
-            columns={columns}
-            rowGetter={i => rows[i]}
-            rowsCount={rowsCount}
-            minHeight={150} /></div> : null;
+        const inputs = this.state.formFields ? 
+                this.state.formFields.map((field, idx) => 
+                    <div>{field.toUpperCase()}: <input
+                        type="text"
+                        key={idx}
+                        placeholder={field}
+                        value={field}
+                    /><br /></div>
+                )
+            : null;
+        // const columns = this.state.formFields ?
+        //     this.state.formFields.map(field => ({ key: field, name: field })) : [];
+        // const rows = this.state.data ? this.state.data : [];
+        // const rowsCount = this.state.data ? this.state.data.length : 0;
+        // const dataGrid = (this.state.formFields && this.state.data) ? <div className="admin-grid"><ReactDataGrid
+        //     columns={columns}
+        //     rowGetter={i => rows[i]}
+        //     rowsCount={rowsCount}
+        //     minHeight={150} /></div> : null;
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -65,7 +68,8 @@ class Admin extends Component {
                     <input type="submit" />        
                 </form>
                 <br />
-                {dataGrid}
+                {/* {dataGrid} */}
+                <form>{inputs}</form>
             </div>
         );
   }
