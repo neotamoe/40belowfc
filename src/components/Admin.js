@@ -14,6 +14,7 @@ class Admin extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleAddSubmit = this.handleAddSubmit.bind(this);
     }
     
     handleChange(event) {
@@ -21,7 +22,7 @@ class Admin extends Component {
     }
 
     handleSubmit(event) {
-        // alert('A data type was submitted: ' + this.state.type);
+        alert('A data type was submitted: ' + this.state.type);
         event.preventDefault();
         fetch('http://localhost:8080/' + this.state.type)
             .then(response =>  response.json())
@@ -43,7 +44,33 @@ class Admin extends Component {
         this.setState({
           [name]: value
         });
-      }
+    }
+
+    handleAddSubmit(event) {
+        // console.log("attempting to add something:", event.target)
+        event.preventDefault();
+        // for each formField, get the state value, then pass to fetch
+        console.log(this.state.formFields)
+        const formFieldsWithoutId = this.state.formFields.filter( x => x != 'id');
+        console.log(formFieldsWithoutId);
+        const fieldsToSubmit = formFieldsWithoutId.map(formField => this.state[formField]);
+        console.log(fieldsToSubmit)
+        console.log("type in handleAddSubmit", this.state.type)
+        console.log(this.state.team_name)
+        const formData = formFieldsWithoutId.map(element => ({[element]: this.state[element]})); 
+        console.log(formData)
+
+        fetch('http://localhost:8080/'+this.state.type, {  
+            method: 'POST',  
+            body: JSON.stringify(formData)
+        })
+        .then(function (data) {  
+          console.log('Request success: ', data);  
+        })  
+        .catch(function (error) {  
+          console.log('Request failure: ', error);  
+        });
+    }
 
     render() {
         const inputs = this.state.formFields ? 
@@ -51,6 +78,7 @@ class Admin extends Component {
                     <div>{field.toUpperCase()}: <input
                         type="text"
                         key={idx}
+                        name={field}
                         value={this.state.field}
                         onChange={this.handleInputChange}
                     /><br /></div>
@@ -61,11 +89,13 @@ class Admin extends Component {
             this.state.formFields.map(field => ({ key: field, name: field })) : [];
         const rows = this.state.data ? this.state.data : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
-        const dataGrid = (this.state.formFields && this.state.data) ? <div className="admin-grid"><ReactDataGrid
-            columns={columns}
-            rowGetter={i => rows[i]}
-            rowsCount={rowsCount}
-            minHeight={150} /></div> : null;
+        const dataGrid = (this.state.formFields && this.state.data) ? 
+            <div className="admin-grid"><ReactDataGrid
+                columns={columns}
+                rowGetter={i => rows[i]}
+                rowsCount={rowsCount}
+                minHeight={150} /></div> 
+            : null;
 
         return (
             <div>
@@ -84,8 +114,16 @@ class Admin extends Component {
                 <br />
                 {dataGrid}
                 <br />
-                {inputs ? <h3>Add Data</h3> : null}
-                <form>{inputs}</form>
+                {inputs ? 
+                    <div>
+                        <h3>Add Data</h3>
+                        <form onSubmit={this.handleAddSubmit}>
+                            <input type="text" key="42" hidden name="type" readOnly value={this.state.type}/>
+                            {inputs}
+                            <button type="submit">Add</button>
+                        </form>
+                    </div>
+                : null}
             </div>
         );
   }
