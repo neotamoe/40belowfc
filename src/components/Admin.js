@@ -6,13 +6,14 @@ class Admin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            type: '0',
+            type: 'locations',
             formFields: null,
             data: null,
         };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
     
     handleChange(event) {
@@ -29,9 +30,20 @@ class Admin extends Component {
                 console.log(Object.keys(results[0]))
                 this.setState({
                     formFields: Object.keys(results[0]),
+                    data: results,
                 })
             });
     }
+
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+    
+        this.setState({
+          [name]: value
+        });
+      }
 
     render() {
         const inputs = this.state.formFields ? 
@@ -39,20 +51,22 @@ class Admin extends Component {
                     <div>{field.toUpperCase()}: <input
                         type="text"
                         key={idx}
-                        placeholder={field}
-                        value={field}
+                        value={this.state.field}
+                        onChange={this.handleInputChange}
                     /><br /></div>
                 )
             : null;
-        // const columns = this.state.formFields ?
-        //     this.state.formFields.map(field => ({ key: field, name: field })) : [];
-        // const rows = this.state.data ? this.state.data : [];
-        // const rowsCount = this.state.data ? this.state.data.length : 0;
-        // const dataGrid = (this.state.formFields && this.state.data) ? <div className="admin-grid"><ReactDataGrid
-        //     columns={columns}
-        //     rowGetter={i => rows[i]}
-        //     rowsCount={rowsCount}
-        //     minHeight={150} /></div> : null;
+
+        const columns = this.state.formFields ?
+            this.state.formFields.map(field => ({ key: field, name: field })) : [];
+        const rows = this.state.data ? this.state.data : [];
+        const rowsCount = this.state.data ? this.state.data.length : 0;
+        const dataGrid = (this.state.formFields && this.state.data) ? <div className="admin-grid"><ReactDataGrid
+            columns={columns}
+            rowGetter={i => rows[i]}
+            rowsCount={rowsCount}
+            minHeight={150} /></div> : null;
+
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
@@ -60,7 +74,7 @@ class Admin extends Component {
                     <select value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>
                         <option value='0' disabled>Select Data Type</option>
                         <option value="locations">Location</option>
-                        <option value="games">Game</option>
+                        {/* <option value="games">Game</option> */}
                         <option value="players">Player</option>
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
@@ -68,7 +82,9 @@ class Admin extends Component {
                     <input type="submit" />        
                 </form>
                 <br />
-                {/* {dataGrid} */}
+                {dataGrid}
+                <br />
+                {inputs ? <h3>Add Data</h3> : null}
                 <form>{inputs}</form>
             </div>
         );
