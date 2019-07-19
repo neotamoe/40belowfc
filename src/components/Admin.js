@@ -61,8 +61,12 @@ class Admin extends Component {
         console.log(formData)
 
         fetch('http://localhost:8080/'+this.state.type, {  
+            headers: {
+                'Content-type': 'application/json'
+            },
             method: 'POST',  
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData[0]),
+            // body: formData,
         })
         .then(function (data) {  
           console.log('Request success: ', data);  
