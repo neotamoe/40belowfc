@@ -22,7 +22,6 @@ class Admin extends Component {
     }
 
     handleSubmit(event) {
-        alert('A data type was submitted: ' + this.state.type);
         event.preventDefault();
         fetch('http://localhost:8080/' + this.state.type)
             .then(response =>  response.json())
@@ -47,18 +46,10 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
-        // console.log("attempting to add something:", event.target)
         event.preventDefault();
         // for each formField, get the state value, then pass to fetch
-        console.log(this.state.formFields)
-        const formFieldsWithoutId = this.state.formFields.filter( x => x != 'id');
-        console.log(formFieldsWithoutId);
-        const fieldsToSubmit = formFieldsWithoutId.map(formField => this.state[formField]);
-        console.log(fieldsToSubmit)
-        console.log("type in handleAddSubmit", this.state.type)
-        console.log(this.state.team_name)
+        const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
         const formData = formFieldsWithoutId.map(element => ({[element]: this.state[element]})); 
-        console.log(formData)
 
         fetch('http://localhost:8080/'+this.state.type, {  
             headers: {
@@ -66,15 +57,31 @@ class Admin extends Component {
             },
             method: 'POST',  
             body: JSON.stringify(formData[0]),
-            // body: formData,
         })
         .then(function (data) {  
-          console.log('Request success: ', data);  
+          console.log('Request response: ', data);  
         })  
         .catch(function (error) {  
           console.log('Request failure: ', error);  
         });
     }
+
+    convertBooleansInPlayers = (array) => {
+        const transformed = array.map(item => {
+            let newObject = {}
+            for(let row in item){
+                if(item[row]===false){
+                    newObject[row] = "false"
+                } else if (item[row]===true){
+                    newObject[row] = "true"
+                } else {
+                    newObject[row] = item[row]
+                }
+            }
+            return newObject;
+        });
+        return transformed;
+    } 
 
     render() {
         const inputs = this.state.formFields ? 
@@ -83,7 +90,7 @@ class Admin extends Component {
                         type="text"
                         key={idx}
                         name={field}
-                        value={this.state.field}
+                        value={this.state.field === true ? "true" : this.state.field === false ? "false" : this.state.field }
                         onChange={this.handleInputChange}
                     /><br /></div>
                 )
@@ -91,7 +98,7 @@ class Admin extends Component {
 
         const columns = this.state.formFields ?
             this.state.formFields.map(field => ({ key: field, name: field })) : [];
-        const rows = this.state.data ? this.state.data : [];
+        const rows = this.state.data && this.state.type === 'players' ? this.convertBooleansInPlayers(this.state.data) : this.state.data ? this.state.data : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
         const dataGrid = (this.state.formFields && this.state.data) ? 
             <div className="admin-grid"><ReactDataGrid
