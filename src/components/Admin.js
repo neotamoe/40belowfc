@@ -46,11 +46,19 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
+        console.log(event.target)
         event.preventDefault();
         // for each formField, get the state value, then pass to fetch
         const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
         const formData = formFieldsWithoutId.map(element => ({[element]: this.state[element]})); 
-
+        console.log(formData[0])
+        const values = Object.values(formData[0])
+        for(let value of values){
+            console.log(value);
+            if(value==undefined){
+                return;
+            }
+        }
         fetch('http://localhost:8080/'+this.state.type, {  
             headers: {
                 'Content-type': 'application/json'
@@ -86,7 +94,7 @@ class Admin extends Component {
     render() {
         const inputs = this.state.formFields ? 
                 this.state.formFields.map((field, idx) => 
-                    <div>{field.toUpperCase()}: <input
+                    <div><label htmlFor={field}>{field.toUpperCase()}: </label><input
                         type="text"
                         key={idx}
                         name={field}
@@ -111,16 +119,16 @@ class Admin extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="datalist">Select Data Type</label>
-                    <select value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>
+                    <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
+                    <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>
                         <option value='0' disabled>Select Data Type</option>
                         <option value="locations">Location</option>
                         {/* <option value="games">Game</option> */}
                         <option value="players">Player</option>
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
-                    </select><br />    
-                    <input type="submit" />        
+                    </select>  
+                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>        
                 </form>
                 <br />
                 {dataGrid}
