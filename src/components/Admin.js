@@ -9,12 +9,14 @@ class Admin extends Component {
             type: 'locations',
             formFields: null,
             data: null,
+            selectedOption: 'add'
         };
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
+        this.handleOptionChange = this.handleOptionChange.bind(this);
     }
     
     handleChange(event) {
@@ -55,7 +57,7 @@ class Admin extends Component {
         const values = Object.values(formData[0])
         for(let value of values){
             console.log(value);
-            if(value==undefined){
+            if(value===undefined){
                 return;
             }
         }
@@ -91,6 +93,12 @@ class Admin extends Component {
         return transformed;
     } 
 
+    handleOptionChange = event => {
+        this.setState({
+          selectedOption: event.target.value
+        });
+      };
+
     render() {
         const inputs = this.state.formFields ? 
                 this.state.formFields.map((field, idx) => 
@@ -106,9 +114,10 @@ class Admin extends Component {
 
         const columns = this.state.formFields ?
             this.state.formFields.map(field => ({ key: field, name: field })) : [];
+        // TODO: fix so rows doesn't update when type updates
         const rows = this.state.data && this.state.type === 'players' ? this.convertBooleansInPlayers(this.state.data) : this.state.data ? this.state.data : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
-        const dataGrid = (this.state.formFields && this.state.data) ? 
+        const dataGrid = (this.state.formFields && this.state.data && this.state.type !== 'games') ? 
             <div className="admin-grid"><ReactDataGrid
                 columns={columns}
                 rowGetter={i => rows[i]}
@@ -119,21 +128,46 @@ class Admin extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                <div className="form-check">
+                    <label>
+                        <input
+                            type="radio"
+                            name="react-tips"
+                            value="view"
+                            checked={this.state.selectedOption === 'view'}
+                            className="form-check-input"
+                            onChange={this.handleOptionChange}
+                        />
+                        View
+                    </label>
+                </div>
+                <div className="form-check">
+                    <label>
+                        <input
+                            type="radio"
+                            name="react-tips"
+                            value="add"
+                            checked={this.state.selectedOption === 'add'}
+                            className="form-check-input"
+                            onChange={this.handleOptionChange}
+                        />
+                        Add
+                    </label>
+                </div>
                     <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
-                    <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>
-                        <option value='0' disabled>Select Data Type</option>
+                    <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
                         <option value="locations">Location</option>
                         {/* <option value="games">Game</option> */}
                         <option value="players">Player</option>
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
                     </select>  
-                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>        
+                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>      
                 </form>
                 <br />
                 {dataGrid}
                 <br />
-                {inputs ? 
+                {inputs && this.state.selectedOption === 'add' ? 
                     <div>
                         <h3>Add Data</h3>
                         <form onSubmit={this.handleAddSubmit}>
