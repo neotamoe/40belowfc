@@ -118,42 +118,44 @@ class Admin extends Component {
         const rows = this.state.data && this.state.type === 'players' ? this.convertBooleansInPlayers(this.state.data) : this.state.data ? this.state.data : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
         const dataGrid = (this.state.formFields && this.state.data && this.state.type !== 'games') ? 
-            <div className="admin-grid"><ReactDataGrid
-                columns={columns}
-                rowGetter={i => rows[i]}
-                rowsCount={rowsCount}
-                minHeight={150} /></div> 
+            <div className="admin-grid">
+                <ReactDataGrid
+                    columns={columns}
+                    rowGetter={i => rows[i]}
+                    rowsCount={rowsCount}
+                />
+            </div> 
             : null;
 
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                <div className="form-check">
-                    <label>
-                        <input
-                            type="radio"
-                            name="react-tips"
-                            value="view"
-                            checked={this.state.selectedOption === 'view'}
-                            className="form-check-input"
-                            onChange={this.handleOptionChange}
-                        />
-                        View
-                    </label>
-                </div>
-                <div className="form-check">
-                    <label>
-                        <input
-                            type="radio"
-                            name="react-tips"
-                            value="add"
-                            checked={this.state.selectedOption === 'add'}
-                            className="form-check-input"
-                            onChange={this.handleOptionChange}
-                        />
-                        Add
-                    </label>
-                </div>
+                    <div className="form-check">
+                        <label>
+                            <input
+                                type="radio"
+                                name="view-or-add"
+                                value="view"
+                                checked={this.state.selectedOption === 'view'}
+                                className="form-check-input"
+                                onChange={this.handleOptionChange}
+                            />
+                            View
+                        </label>
+                    </div>
+                    <div className="form-check">
+                        <label>
+                            <input
+                                type="radio"
+                                name="view-or-add"
+                                value="add"
+                                checked={this.state.selectedOption === 'add'}
+                                className="form-check-input"
+                                onChange={this.handleOptionChange}
+                            />
+                            Add
+                        </label>
+                    </div>
                     <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
                     <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
                         <option value="locations">Location</option>
@@ -179,7 +181,7 @@ class Admin extends Component {
                 : null}
             </div>
         );
-  }
+    }
  
 }
 

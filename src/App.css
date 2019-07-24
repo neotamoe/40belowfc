@@ -82,7 +82,7 @@ li a:hover {
 
 /* set wrapper around grid to fix height -- this will need to be reworked */
 .admin-grid {
-  height: 175px;
+  height: 300px;
 }
 
 /* override default styles -- this will need to be reworked */
