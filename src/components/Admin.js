@@ -114,8 +114,7 @@ class Admin extends Component {
 
         const columns = this.state.formFields ?
             this.state.formFields.map(field => ({ key: field, name: field })) : [];
-        // TODO: fix so rows doesn't update when type updates
-        const rows = this.state.data && this.state.type === 'players' ? this.convertBooleansInPlayers(this.state.data) : this.state.data ? this.state.data : [];
+        const rows = this.state.data ? this.convertBooleansInPlayers(this.state.data) : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
         const dataGrid = (this.state.formFields && this.state.data && this.state.type !== 'games') ? 
             <div className="admin-grid">
