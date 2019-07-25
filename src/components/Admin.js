@@ -76,7 +76,7 @@ class Admin extends Component {
         });
     }
 
-    convertBooleansInPlayers = (array) => {
+    checkForAndConvertBooleans = (array) => {
         const transformed = array.map(item => {
             let newObject = {}
             for(let row in item){
@@ -114,7 +114,7 @@ class Admin extends Component {
 
         const columns = this.state.formFields ?
             this.state.formFields.map(field => ({ key: field, name: field })) : [];
-        const rows = this.state.data ? this.convertBooleansInPlayers(this.state.data) : [];
+        const rows = this.state.data ? this.checkForAndConvertBooleans(this.state.data) : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
         const dataGrid = (this.state.formFields && this.state.data && this.state.type !== 'games') ? 
             <div className="admin-grid">
