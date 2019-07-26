@@ -1,6 +1,13 @@
 import React, {Component} from 'react';
 import ReactDataGrid from 'react-data-grid';
+// bootstrap is needed for table styles
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
+
+const styles = {
+    addViewRadio: {
+        margin: '20px'
+    }
+}
 
 class Admin extends Component {
     constructor(props) {
@@ -128,9 +135,9 @@ class Admin extends Component {
 
         return (
             <div>
+                <h4>Add/View Location, Player, Opponent or Season</h4>
                 <form onSubmit={this.handleSubmit}>
-                    <div className="form-check">
-                        <label>
+                        <label style={styles.addViewRadio}>
                             <input
                                 type="radio"
                                 name="view-or-add"
@@ -141,9 +148,7 @@ class Admin extends Component {
                             />
                             View
                         </label>
-                    </div>
-                    <div className="form-check">
-                        <label>
+                        <label style={styles.addViewRadio}>
                             <input
                                 type="radio"
                                 name="view-or-add"
@@ -154,7 +159,6 @@ class Admin extends Component {
                             />
                             Add
                         </label>
-                    </div>
                     <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
                     <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
                         <option value="locations">Location</option>
