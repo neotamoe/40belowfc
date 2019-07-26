@@ -6,7 +6,6 @@ import FormerRoster from './components/FormerRoster';
 import Stats from './components/Stats';
 import Gallery from './components/Gallery';
 import Admin from './components/Admin';
-import Spinner from './components/Spinner'
 
 function App() {
   return (
@@ -35,7 +34,7 @@ function App() {
           <Route path='/admin' component={Admin}/>
         </Switch>
       </div>
-      <Spinner></Spinner>
+      {/* <Spinner></Spinner> */}
       <div style={{border: 'purple 1px solid', marginTop: '250px'}}>
         <h3>PLANNING (this will disappear later):</h3>
         <ul>
