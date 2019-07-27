@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import ReactDataGrid from 'react-data-grid';
+import GameForm from './GameForm';
+
 // bootstrap is needed for table styles
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
@@ -24,6 +26,7 @@ class Admin extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.clearTable = this.clearTable.bind(this);
     }
     
     handleChange(event) {
@@ -104,7 +107,14 @@ class Admin extends Component {
         this.setState({
           selectedOption: event.target.value
         });
-      };
+    };
+
+    clearTable = () => {
+        this.setState({
+            formFields: null,
+            data: null,
+        })
+    }
 
     render() {
         const inputs = this.state.formFields ? 
@@ -167,7 +177,8 @@ class Admin extends Component {
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
                     </select>  
-                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>      
+                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>
+                    <input type="button" value="Clear Table"  style={{marginLeft: '10px'}} onClick={this.clearTable}/>      
                 </form>
                 <br />
                 {dataGrid}
@@ -182,6 +193,7 @@ class Admin extends Component {
                         </form>
                     </div>
                 : null}
+                <GameForm/>
             </div>
         );
     }
