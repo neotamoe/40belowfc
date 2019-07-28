@@ -5,6 +5,10 @@ import './ReactDateTime.css';
 const styles = {
     pickerWidth: {
         width: '33%'
+    },
+    inputWidth: {
+        width: '25%',
+        marginBottom: '20px'
     }
 }
 
@@ -13,35 +17,38 @@ class GameForm extends Component {
         return (
             <div>
                 <h4>Add Game</h4>
-                <p>WIP: This is the game form - inputs to be added</p>
                 <form>
-                    <div style={styles.pickerWidth}>
+                    <div style={styles.inputWidth}>
                         <label>Date and Time:</label>
                         <Datetime />
                     </div>
-                    <label>Score (US):</label>
-                    <input type="number"/><br /> 
-                    <label>Score (THEM):</label>
-                    <input type="number"/><br />
-                    <label>Game Order:</label>
-                    <input type="number"/><br />
-                    <label>Location:</label>
-                    <select>
+                    <div>
+                        <label>Score (US):</label><br />
+                        <input type="number" min="0" placeholder="0" style={styles.inputWidth}/><br /> 
+                    </div>
+                    <div>
+                        <label>Score (THEM):</label><br />
+                        <input type="number" min="0" placeholder="0" style={styles.inputWidth}/><br />
+                    </div>
+                    <label>Game Order:</label><br />
+                    <input type="number" min="1" max="8" placeholder="game 1-8" style={styles.inputWidth}/><br />
+                    <label>Location:</label><br />
+                    <select style={styles.inputWidth}>
                         <option value="2">Holy Angels</option>
                         <option value="3">Concordia U</option>
                         <option value="4">WSP Dome</option>
                         <option value="5">Champions Hall</option>
                         <option value="13">Augsburg</option>
                     </select><br />
-                    <label>Result:</label>
-                    <select>
+                    <label>Result:</label><br />
+                    <select style={styles.inputWidth}>
                         <option value="1">Win</option>
                         <option value="2">Lose</option>
                         <option value="3">Tie</option>
                         <option value="4">Unknown</option>
                     </select><br />
-                    <label>Opponent:</label>
-                    <select>
+                    <label>Opponent:</label><br />
+                    <select style={styles.inputWidth}>
                         <option value="1">Bimbos</option>
                         <option value="2">Pagliacci</option>
                         <option value="3">Securian SHINanigans</option>
@@ -51,13 +58,13 @@ class GameForm extends Component {
                         <option value="5">Premiums</option>
                         <option value="8">Mouth Breathers</option>
                     </select><br />
-                    <label>Season:</label>
-                    <select>
+                    <label>Season:</label><br />
+                    <select style={styles.inputWidth}>
                         <option value="1">April 2019</option>
                         <option value="2">June 2019</option>
                     </select><br />
-                    <label>Playoff Game?:</label>
-                    <select>
+                    <label>Playoff Game?:</label><br />
+                    <select style={styles.inputWidth}>
                         <option value="1">True</option>
                         <option value="0">False</option>
                     </select><br />

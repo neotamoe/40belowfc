@@ -34,17 +34,11 @@ function App() {
           <Route path='/admin' component={Admin}/>
         </Switch>
       </div>
-      {/* <Spinner></Spinner> */}
       <div style={{border: 'purple 1px solid', marginTop: '250px'}}>
-        <h3>PLANNING (this will disappear later):</h3>
+        <h3>TODO LIST: (this will disappear later):</h3>
         <ul>
-          <li>navbar</li>
-          <li>current roster</li>
-          <li>former roster</li>
-          <li>stats</li>
-          <li>next game</li>
-          <li>photos</li>
-          <li>admin page</li>
+          <li>form validation</li>
+          <li>better arrange form inputs layout</li>
         </ul>
       </div>
     </div>
