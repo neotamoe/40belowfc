@@ -57,6 +57,17 @@ class Admin extends Component {
         });
     }
 
+    handleDateTimeInputChange = (event) => {
+        const dateTime = event.toDate();
+        const dateTimeArray = dateTime.toISOString().split("T");
+        const date = dateTimeArray[0];
+        const time = dateTimeArray[1].substring(0,8);
+        this.setState({
+            date: date,
+            time: time,
+        })
+    }
+
     handleAddSubmit(event) {
         console.log(event.target)
         event.preventDefault();
@@ -114,6 +125,12 @@ class Admin extends Component {
             formFields: null,
             data: null,
         })
+    }
+
+    addGame = (event) => {
+        event.preventDefault();
+        console.log(event.target)
+        console.log("add game button hit")
     }
 
     render() {
@@ -193,7 +210,7 @@ class Admin extends Component {
                         </form>
                     </div>
                 : null}
-                <GameForm/>
+                <GameForm addGame={this.addGame} handleInputChange={this.handleInputChange} handleDateTimeInputChange={this.handleDateTimeInputChange}/>
             </div>
         );
     }
