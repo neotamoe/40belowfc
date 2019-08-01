@@ -18,7 +18,9 @@ class Admin extends Component {
             type: 'locations',
             formFields: null,
             data: null,
-            selectedOption: 'add'
+            selectedOption: 'add',
+            isLoading: false,
+            error: false,
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -34,15 +36,33 @@ class Admin extends Component {
     }
 
     handleSubmit(event) {
+        this.setState({
+            isLoading: true
+        })
         event.preventDefault();
         fetch('http://localhost:8080/' + this.state.type)
-            .then(response =>  response.json())
+            .then((response) => {
+                if(response.ok) {
+                    return response;
+                }
+                throw Error(response.statusText)
+            })
+            .then(response => {
+                return response.json()
+            })
             .then(results => {
                 console.log(results)
                 console.log(Object.keys(results[0]))
                 this.setState({
                     formFields: Object.keys(results[0]),
                     data: results,
+                    isLoading: false,
+                })
+            })
+            .catch((error) => {
+                this.setState({
+                    error: true,
+                    isLoading: false
                 })
             });
     }
@@ -198,7 +218,7 @@ class Admin extends Component {
                     <input type="button" value="Clear Table"  style={{marginLeft: '10px'}} onClick={this.clearTable}/>      
                 </form>
                 <br />
-                {dataGrid}
+                { this.state.isLoading ? <Spinner /> : this.state.error ? <p>Uh oh.  Something went wrong.  Try again.</p> : dataGrid }
                 <br />
                 {inputs && this.state.selectedOption === 'add' ? 
                     <div>
