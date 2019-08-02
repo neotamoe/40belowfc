@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDataGrid from 'react-data-grid';
 import GameForm from './GameForm';
+import Spinner from './Spinner';
 
 // bootstrap is needed for table styles
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
@@ -21,6 +22,7 @@ class Admin extends Component {
             selectedOption: 'add',
             isLoading: false,
             error: false,
+            formControls: {}
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -68,13 +70,23 @@ class Admin extends Component {
     }
 
     handleInputChange(event) {
-        const target = event.target;
-        const value = target.value;
-        const name = target.name;
-    
+        const name = event.target.name;
+        const value = event.target.value;
+  
+        const updatedControls = {
+          ...this.state.formControls
+        };
+        const updatedFormElement = {
+          ...updatedControls[name]
+        };
+        updatedFormElement.value = value;
+        updatedControls[name] = updatedFormElement;
+
         this.setState({
-          [name]: value
+            formControls: updatedControls
         });
+
+        // console.log(this.state.formControls);
     }
 
     handleDateTimeInputChange = (event) => {
@@ -148,9 +160,12 @@ class Admin extends Component {
     }
 
     addGame = (event) => {
-        event.preventDefault();
-        console.log(event.target)
-        console.log("add game button hit")
+        // event.preventDefault();
+        const formData = {};
+        for (let formElementId in this.state.formControls) {
+            formData[formElementId] = this.state.formControls[formElementId].value;
+        }
+        // console.log(formData)
     }
 
     render() {

@@ -20,7 +20,7 @@ class GameForm extends Component {
                 <form onSubmit={this.props.addGame}>
                     <div style={styles.inputWidth}>
                         <label>Date and Time:</label>
-                        <Datetime dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss" inputProps={{ placeholder: 'Select Date & Time', name: 'date_time'}} onBlur={this.props.handleDateTimeInputChange}/>
+                        <Datetime dateFormat="YYYY-MM-DD" timeFormat="HH:mm:ss" inputProps={{ readOnly: true, placeholder: 'Select Date & Time', name: 'date_time'}} onBlur={this.props.handleDateTimeInputChange}/>
                     </div>
                     <div>
                         <label>Score (US):</label><br />
