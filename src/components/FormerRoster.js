@@ -16,6 +16,9 @@ class FormerRoster extends Component {
                 }
                 throw Error(response.statusText)
             })
+            .then(response => {
+                return response.json()
+            })
             .then(res => {
                 let playersSorted = res.sort((a, b) => { return (a.last_name < b.last_name) ? -1 : ((a.last_name > b.last_name) ? 1 : 0) });
                 this.setState({
@@ -24,6 +27,7 @@ class FormerRoster extends Component {
                 })
             })
             .catch((error) => {
+                // console.log(error)
                 this.setState({
                     error: true,
                     isLoading: false
