@@ -71,7 +71,7 @@ class Admin extends Component {
 
     handleInputChange(event) {
         const name = event.target.name;
-        const value = event.target.value;
+        const value = this.checkForBoolean(event.target.value);
   
         const updatedControls = {
           ...this.state.formControls
@@ -79,7 +79,7 @@ class Admin extends Component {
         const updatedFormElement = {
           ...updatedControls[name]
         };
-        updatedFormElement.value = value;
+        updatedFormElement.value = value;  
         updatedControls[name] = updatedFormElement;
 
         this.setState({
@@ -89,6 +89,14 @@ class Admin extends Component {
         // console.log(this.state.formControls);
     }
 
+    checkForBoolean = (value) => {
+        if (value && typeof value === 'string') {
+          if (value.toLowerCase() === "true") return true;
+          if (value.toLowerCase() === "false") return false;
+        }
+        return parseInt(value);
+     }
+
     handleDateTimeInputChange = (event) => {
         const dateTime = event.toDate();
         const dateTimeArray = dateTime.toISOString().split("T");
@@ -97,7 +105,8 @@ class Admin extends Component {
         this.setState({
             date: date,
             time: time,
-        })
+        });
+        // TODO: fix so fits within formControls
     }
 
     handleAddSubmit(event) {
@@ -160,12 +169,27 @@ class Admin extends Component {
     }
 
     addGame = (event) => {
-        // event.preventDefault();
+        event.preventDefault();
         const formData = {};
         for (let formElementId in this.state.formControls) {
             formData[formElementId] = this.state.formControls[formElementId].value;
         }
-        // console.log(formData)
+        formData['time'] = this.state.date.value;
+        formData['date'] = this.state.time.value;
+        console.log(formData)
+        fetch('http://localhost:8080/games', {  
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: 'POST',  
+            body: JSON.stringify(formData),
+        })
+        .then(function (data) {  
+          console.log('Request response: ', data);  
+        })  
+        .catch(function (error) {  
+          console.log('Request failure: ', error);  
+        });
     }
 
     render() {

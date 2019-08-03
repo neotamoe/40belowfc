@@ -70,8 +70,8 @@ class GameForm extends Component {
                     <label>Playoff Game?:</label><br />
                     <select style={styles.inputWidth} name="is_playoff_game" onChange={this.props.handleInputChange}>
                         <option value="">Select True/False</option>
-                        <option value="1">True</option>
-                        <option value="0">False</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
                     </select><br />
                     <button type="submit">Add Game</button>
                 </form>
