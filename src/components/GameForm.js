@@ -33,16 +33,16 @@ class GameForm extends Component {
                     <label>Game Order:</label><br />
                     <input type="number" min="1" max="8" placeholder="game 1-8" name="game_order" style={styles.inputWidth} onChange={this.props.handleInputChange}/><br />
                     <label>Location:</label><br />
-                    <select style={styles.inputWidth} name="location_id" onChange={this.props.handleInputChange}>
+                    <select style={styles.inputWidth} name="location" onChange={this.props.handleInputChange}>
                         <option value="">Select Location</option>
                         <option value="2">Holy Angels</option>
                         <option value="3">Concordia U</option>
-                        <option value="4">WSP Dome</option>
+                        <option value="4">West St Paul Dome</option>
                         <option value="5">Champions Hall</option>
                         <option value="13">Augsburg</option>
                     </select><br />
                     <label>Result:</label><br />
-                    <select style={styles.inputWidth} name="result_id" onChange={this.props.handleInputChange}>
+                    <select style={styles.inputWidth} name="result" onChange={this.props.handleInputChange}>
                         <option value="">Select Result</option>
                         <option value="1">Win</option>
                         <option value="2">Lose</option>
@@ -50,7 +50,7 @@ class GameForm extends Component {
                         <option value="4">Unknown</option>
                     </select><br />
                     <label>Opponent:</label><br />
-                    <select style={styles.inputWidth} name="opponent_id" onChange={this.props.handleInputChange}>
+                    <select style={styles.inputWidth} name="opponent" onChange={this.props.handleInputChange}>
                         <option value="">Select Opponent</option>
                         <option value="1">Bimbos</option>
                         <option value="2">Pagliacci</option>
@@ -62,7 +62,7 @@ class GameForm extends Component {
                         <option value="8">Mouth Breathers</option>
                     </select><br />
                     <label>Season:</label><br />
-                    <select style={styles.inputWidth} name="season_id" onChange={this.props.handleInputChange}>
+                    <select style={styles.inputWidth} name="season" onChange={this.props.handleInputChange}>
                         <option value="">Select Season</option>
                         <option value="1">April 2019</option>
                         <option value="2">June 2019</option>

@@ -72,21 +72,29 @@ class Admin extends Component {
     handleInputChange(event) {
         const name = event.target.name;
         const value = this.checkForBoolean(event.target.value);
-  
         const updatedControls = {
           ...this.state.formControls
         };
-        const updatedFormElement = {
+        let updatedFormElement = {
           ...updatedControls[name]
         };
-        updatedFormElement.value = value;  
+        console.log(updatedFormElement)
+        if(name==='location' || name==='result' || name==='opponent' || name==='season'){
+            const objectName = name + "_name";
+            updatedFormElement = updatedFormElement[name]
+            updatedFormElement = {}
+            updatedFormElement.id = value;
+            updatedFormElement[objectName] =  event.target.options[event.target.selectedIndex].text;
+            console.log(updatedFormElement)
+        }
+        else {
+            updatedFormElement.value = value;  
+        }
         updatedControls[name] = updatedFormElement;
 
         this.setState({
             formControls: updatedControls
         });
-
-        // console.log(this.state.formControls);
     }
 
     checkForBoolean = (value) => {
@@ -172,10 +180,16 @@ class Admin extends Component {
         event.preventDefault();
         const formData = {};
         for (let formElementId in this.state.formControls) {
-            formData[formElementId] = this.state.formControls[formElementId].value;
+            formData[formElementId] = this.state.formControls[formElementId].value 
+            // need way to get data out that's in different format than name: value
         }
         formData['time'] = this.state.date.value;
         formData['date'] = this.state.time.value;
+        // needs to be in this format to save foreign key
+        // formData['location'] = {
+        //     id: 4,
+        //     location_name: "West St Paul Dome"
+        // }
         console.log(formData)
         fetch('http://localhost:8080/games', {  
             headers: {
