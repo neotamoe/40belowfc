@@ -53,8 +53,8 @@ class Admin extends Component {
                 return response.json()
             })
             .then(results => {
-                console.log(results)
-                console.log(Object.keys(results[0]))
+                // console.log(results)
+                // console.log(Object.keys(results[0]))
                 this.setState({
                     formFields: Object.keys(results[0]),
                     data: results,
@@ -71,27 +71,25 @@ class Admin extends Component {
 
     handleInputChange(event) {
         const name = event.target.name;
-        const value = this.checkForBoolean(event.target.value);
+        const value = event.target.value;
         const updatedControls = {
           ...this.state.formControls
         };
         let updatedFormElement = {
           ...updatedControls[name]
         };
-        console.log(updatedFormElement)
         if(name==='location' || name==='result' || name==='opponent' || name==='season'){
             const objectName = name + "_name";
             updatedFormElement = updatedFormElement[name]
             updatedFormElement = {}
             updatedFormElement.id = value;
             updatedFormElement[objectName] =  event.target.options[event.target.selectedIndex].text;
-            console.log(updatedFormElement)
         }
         else {
             updatedFormElement.value = value;  
         }
         updatedControls[name] = updatedFormElement;
-
+        console.log(updatedControls)
         this.setState({
             formControls: updatedControls
         });
@@ -118,12 +116,10 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
-        console.log(event.target)
         event.preventDefault();
         // for each formField, get the state value, then pass to fetch
         const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
         const formData = formFieldsWithoutId.map(element => ({[element]: this.state[element]})); 
-        console.log(formData[0])
         const values = Object.values(formData[0])
         for(let value of values){
             console.log(value);
@@ -180,16 +176,10 @@ class Admin extends Component {
         event.preventDefault();
         const formData = {};
         for (let formElementId in this.state.formControls) {
-            formData[formElementId] = this.state.formControls[formElementId].value 
-            // need way to get data out that's in different format than name: value
+            formData[formElementId] = this.state.formControls[formElementId].value ? this.checkForBoolean(this.state.formControls[formElementId].value) : this.state.formControls[formElementId]
         }
-        formData['time'] = this.state.date.value;
-        formData['date'] = this.state.time.value;
-        // needs to be in this format to save foreign key
-        // formData['location'] = {
-        //     id: 4,
-        //     location_name: "West St Paul Dome"
-        // }
+        formData['time'] = this.state.date.value ? this.state.date.value : null;
+        formData['date'] = this.state.time.value ? this.state.time.value : null;
         console.log(formData)
         fetch('http://localhost:8080/games', {  
             headers: {
