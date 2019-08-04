@@ -3,6 +3,8 @@ import ReactDataGrid from 'react-data-grid';
 import GameForm from './GameForm';
 import Spinner from './Spinner';
 
+import moment from 'moment';
+
 // bootstrap is needed for table styles
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 
@@ -104,13 +106,11 @@ class Admin extends Component {
      }
 
     handleDateTimeInputChange = (event) => {
-        const dateTime = event.toDate();
-        const dateTimeArray = dateTime.toISOString().split("T");
-        const date = dateTimeArray[0];
-        const time = dateTimeArray[1].substring(0,8);
+        const dateTimeInput = event.toDate();
+        const dateTime = moment(dateTimeInput).format('YYYY-MM-DDTHH:mm:ss');
         this.setState({
-            date: date,
-            time: time,
+            date: {value: dateTime},
+            time: {value: dateTime},
         });
         // TODO: fix so fits within formControls
     }
