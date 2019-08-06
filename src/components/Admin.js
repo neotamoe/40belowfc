@@ -102,17 +102,31 @@ class Admin extends Component {
           if (value.toLowerCase() === "true") return true;
           if (value.toLowerCase() === "false") return false;
         }
-        return parseInt(value);
+        if(!isNaN(value)){
+            return parseInt(value);
+        }
+        return value;
      }
 
     handleDateTimeInputChange = (event) => {
         const dateTimeInput = event.toDate();
         const dateTime = moment(dateTimeInput).format('YYYY-MM-DDTHH:mm:ss');
+        const updatedControls = {
+            ...this.state.formControls
+        };
+        let updatedDateFormElement = {
+            ...updatedControls['date']
+        };
+        updatedDateFormElement = {value: dateTime}
+        let updatedTimeFormElement = {
+            ...updatedControls['time']
+        };
+        updatedTimeFormElement = {value: dateTime}
+        updatedControls['date'] = updatedDateFormElement;
+        updatedControls['time'] = updatedTimeFormElement;
         this.setState({
-            date: {value: dateTime},
-            time: {value: dateTime},
-        });
-        // TODO: fix so fits within formControls
+            formControls: updatedControls
+        })
     }
 
     handleAddSubmit(event) {
@@ -178,8 +192,6 @@ class Admin extends Component {
         for (let formElementId in this.state.formControls) {
             formData[formElementId] = this.state.formControls[formElementId].value ? this.checkForBoolean(this.state.formControls[formElementId].value) : this.state.formControls[formElementId]
         }
-        formData['time'] = this.state.date.value ? this.state.date.value : null;
-        formData['date'] = this.state.time.value ? this.state.time.value : null;
         console.log(formData)
         fetch('http://localhost:8080/games', {  
             headers: {
