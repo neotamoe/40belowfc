@@ -7,7 +7,7 @@ const styles = {
         width: '33%'
     },
     inputWidth: {
-        width: '25%',
+        width: '40%',
         marginBottom: '20px'
     }
 }
@@ -94,7 +94,7 @@ class GameForm extends Component {
     render() {
         return (
             <div>
-                { this.state.error ? <p>Oops.  Something went wrong.  Try</p> : null }
+                { this.state.error ? <p>Oops.  Something went wrong.  Try Again.</p> : null }
                 <h4>Add Game</h4>
                 <form onSubmit={this.props.addGame}>
                     <div style={styles.inputWidth}>
@@ -137,14 +137,6 @@ class GameForm extends Component {
                             <label>Opponent:</label><br />
                             <select style={styles.inputWidth} name="opponent" onChange={this.props.handleInputChange}>
                                 <option value="">Select Opponent</option>
-                                <option value="1">Bimbos</option>
-                                <option value="2">Pagliacci</option>
-                                <option value="3">Securian SHINanigans</option>
-                                <option value="4">Blade</option>
-                                <option value="6">One Shot Wonders</option>
-                                <option value="7">Wolf Pack FC</option>
-                                <option value="5">Premiums</option>
-                                <option value="8">Mouth Breathers</option>
                                 {this.state.opponent.map((e, key) => {
                                     return <option key={e.id} value={e.id}>{e.team_name}</option>;
                                 })}

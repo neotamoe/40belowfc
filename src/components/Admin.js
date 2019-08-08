@@ -109,6 +109,9 @@ class Admin extends Component {
      }
 
     handleDateTimeInputChange = (event) => {
+        if(event.target === undefined) {
+            return;
+        }
         const dateTimeInput = event.toDate();
         const dateTime = moment(dateTimeInput).format('YYYY-MM-DDTHH:mm:ss');
         const updatedControls = {

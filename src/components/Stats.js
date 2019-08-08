@@ -38,7 +38,7 @@ class Stats extends Component {
       ? this.state.games.map(game => 
         <tr key={game.id}>
           <td style={styles.cell}>{game.date[1]}-{game.date[2]}-{game.date[0]}</td>
-          <td style={styles.cell}>{game.time[0]}:{game.time[1] == 0 ? "00" : game.time[1]}</td>
+          <td style={styles.cell}>{game.time[0]}:{game.time[1] === 0 ? "00" : game.time[1]}</td>
           <td style={styles.cell}>{game.score_us}</td>
           <td style={styles.cell}>{game.opponent.team_name}</td>
           <td style={styles.cell}>{game.score_them}</td>
