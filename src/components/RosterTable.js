@@ -5,13 +5,8 @@ const styles = {
       margin: 20,
       padding: 10
   },
-  tableCenter: {
-      marginLeft: 'auto',
-      marginRight: 'auto',
-  },
   table: {
-      width: '80%',
-      marginLeft: '10%',
+      width: '50%',
   }       
 }
 
@@ -24,7 +19,6 @@ class RosterTable extends Component {
                 <tr style={styles.player}>
                     <th style={styles.player}>First Name</th>
                     <th style={styles.player}>Last Name</th>
-                    <th style={styles.player}>#</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +26,6 @@ class RosterTable extends Component {
                     <tr style={styles.player} key={player.id}>
                         <td style={styles.player}>{player.first_name}</td>
                         <td style={styles.player}>{player.last_name}</td>
-                        <td style={styles.player}>{player.jersey_number}</td>
                     </tr>
                 )}
             </tbody>

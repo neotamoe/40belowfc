@@ -33,6 +33,7 @@ class Admin extends Component {
         this.handleAddSubmit = this.handleAddSubmit.bind(this);
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.clearTable = this.clearTable.bind(this);
+        this.handleAddViewInputChange = this.handleAddViewInputChange.bind(this);
     }
     
     handleChange(event) {
@@ -69,6 +70,16 @@ class Admin extends Component {
                     isLoading: false
                 })
             });
+    }
+
+    handleAddViewInputChange(event) {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     handleInputChange(event) {
@@ -133,6 +144,7 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
+        // TODO: fix so works with players (works with other things that only have one input besides id)
         event.preventDefault();
         // for each formField, get the state value, then pass to fetch
         const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
@@ -219,7 +231,7 @@ class Admin extends Component {
                         key={idx}
                         name={field}
                         value={this.state.field === true ? "true" : this.state.field === false ? "false" : this.state.field }
-                        onChange={this.handleInputChange}
+                        onChange={this.handleAddViewInputChange}
                     /><br /></div>
                 )
             : null;

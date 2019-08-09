@@ -17,7 +17,7 @@ function App() {
           <ul className="header">
             <li><NavLink exact={true} to="/">Home</NavLink></li>
             <li><NavLink to="/roster">Current Roster</NavLink></li>
-            <li><NavLink to="/roster/former">Former Roster</NavLink></li>
+            <li><NavLink to="/former">Former Roster</NavLink></li>
             <li><NavLink to="/stats">Stats</NavLink></li>
             <li><NavLink to="/gallery">Gallery</NavLink></li>
             <li><NavLink to="/admin">Admin</NavLink></li>
@@ -27,7 +27,7 @@ function App() {
       <div className="content">
         <Switch>
           {/* <Route exact path='/' component={Home}/> */}
-          <Route path='/roster/former' component={FormerRoster}/>
+          <Route path='/former' component={FormerRoster}/>
           <Route path='/roster' component={CurrentRoster}/>
           <Route path='/stats' component={Stats}/>
           <Route path='/gallery' component={Gallery}/>
