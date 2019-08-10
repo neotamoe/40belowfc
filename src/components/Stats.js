@@ -43,6 +43,7 @@ class Stats extends Component {
           <td style={styles.cell}>{game.score_us}</td>
           <td style={styles.cell}>{game.opponent.team_name}</td>
           <td style={styles.cell}>{game.score_them}</td>
+          <td style={styles.cell}>{game.location.location_name}</td>
           <td style={styles.cell}>{game.result.result}</td>
           <td style={styles.cell}>{game.season.month_start} {game.season.year}</td>
           <td style={styles.cell}>{game.game_order}</td>
@@ -58,6 +59,7 @@ class Stats extends Component {
                   <th style={styles.cell}>Goals</th>
                   <th style={styles.cell}>Opponent</th>
                   <th style={styles.cell}>Opp Goals</th>
+                  <th style={styles.cell}>Location</th>
                   <th style={styles.cell}>Result</th>
                   <th style={styles.cell}>Season</th>
                   <th style={styles.cell}>Game#</th>

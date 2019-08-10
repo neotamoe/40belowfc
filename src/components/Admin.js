@@ -120,9 +120,10 @@ class Admin extends Component {
      }
 
     handleDateTimeInputChange = (event) => {
-        if(event.target === undefined) {
-            return;
-        }
+        console.log('event.toDate() in handleDateTimeInputChange', event.toDate())
+        // if(event.target === undefined) {
+        //     return;
+        // }
         const dateTimeInput = event.toDate();
         const dateTime = moment(dateTimeInput).format('YYYY-MM-DDTHH:mm:ss');
         const updatedControls = {
@@ -202,7 +203,7 @@ class Admin extends Component {
     }
 
     addGame = (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const formData = {};
         for (let formElementId in this.state.formControls) {
             formData[formElementId] = this.state.formControls[formElementId].value ? this.checkForBoolean(this.state.formControls[formElementId].value) : this.state.formControls[formElementId]
