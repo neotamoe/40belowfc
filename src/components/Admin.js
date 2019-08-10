@@ -145,24 +145,25 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
-        // TODO: fix so works with players (works with other things that only have one input besides id)
         event.preventDefault();
-        // for each formField, get the state value, then pass to fetch
         const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
-        const formData = formFieldsWithoutId.map(element => ({[element]: this.state[element]})); 
-        const values = Object.values(formData[0])
-        for(let value of values){
-            console.log(value);
-            if(value===undefined){
-                return;
-            }
-        }
+        const dataToSubmit = {}
+        const formData = formFieldsWithoutId.map(element => (dataToSubmit[element] = this.state[element])); 
+        // TODO: find way to prevent submit of empty field for all but jersey_number
+        // console.log('dataToSubmit: ', dataToSubmit)
+        // const values = Object.values(dataToSubmit)
+        // for(let value in dataToSubmit){
+        //     console.log(value);
+        //     if(value===undefined){
+        //         return;
+        //     }
+        // }
         fetch('http://localhost:8080/'+this.state.type, {  
             headers: {
                 'Content-type': 'application/json'
             },
             method: 'POST',  
-            body: JSON.stringify(formData[0]),
+            body: JSON.stringify(dataToSubmit),
         })
         .then(function (data) {  
           console.log('Request response: ', data);  
