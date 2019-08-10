@@ -80,6 +80,10 @@ li a:hover {
   padding-top: 15px;
 }
 
+.season-divider {
+  border-bottom: 5px solid black;
+}
+
 /* set wrapper around grid to fix height -- this will need to be reworked */
 .admin-grid {
   height: 300px;
