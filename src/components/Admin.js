@@ -120,7 +120,6 @@ class Admin extends Component {
      }
 
     handleDateTimeInputChange = (event) => {
-        console.log('event.toDate() in handleDateTimeInputChange', event)
         if(!event) {
             return;
         }
@@ -145,19 +144,16 @@ class Admin extends Component {
     }
 
     handleAddSubmit(event) {
+        // TODO: clear fields after submit
         event.preventDefault();
         const formFieldsWithoutId = this.state.formFields.filter( x => x !== 'id');
         const dataToSubmit = {}
         const formData = formFieldsWithoutId.map(element => (dataToSubmit[element] = this.state[element])); 
-        // TODO: find way to prevent submit of empty field for all but jersey_number
-        // console.log('dataToSubmit: ', dataToSubmit)
-        // const values = Object.values(dataToSubmit)
-        // for(let value in dataToSubmit){
-        //     console.log(value);
-        //     if(value===undefined){
-        //         return;
-        //     }
-        // }
+        for(let value in dataToSubmit){
+            if(value!=='jersey_number' && dataToSubmit[value]===undefined){
+                return;
+            }
+        }
         fetch('http://localhost:8080/'+this.state.type, {  
             headers: {
                 'Content-type': 'application/json'
@@ -204,6 +200,7 @@ class Admin extends Component {
     }
 
     addGame = (event) => {
+        // TODO: clear fields after submit
         // event.preventDefault();
         const formData = {};
         for (let formElementId in this.state.formControls) {
