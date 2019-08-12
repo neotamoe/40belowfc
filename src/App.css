@@ -84,6 +84,19 @@ li a:hover {
   border-bottom: 5px solid black;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  margin-left: 20px;
+}
+
 /* set wrapper around grid to fix height -- this will need to be reworked */
 .admin-grid {
   height: 300px;
