@@ -225,12 +225,13 @@ class Admin extends Component {
     render() {
         const inputs = this.state.formFields ? 
                 this.state.formFields.map((field, idx) => 
-                    <div><label htmlFor={field}>{field.toUpperCase()}: </label><input
-                        type="text"
-                        key={idx}
-                        name={field}
-                        value={this.state.field === true ? "true" : this.state.field === false ? "false" : this.state.field }
-                        onChange={this.handleAddViewInputChange}
+                    <div><label htmlFor={field}>{field.toUpperCase()}: </label>
+                        <input
+                            type="text"
+                            key={idx}
+                            name={field}
+                            value={this.state.field === true ? "true" : this.state.field === false ? "false" : this.state.field }
+                            onChange={this.handleAddViewInputChange}
                     /><br /></div>
                 )
             : null;
@@ -253,38 +254,38 @@ class Admin extends Component {
             <div>
                 <h4>Add/View Location, Player, Opponent or Season</h4>
                 <form onSubmit={this.handleSubmit}>
-                        <label style={styles.addViewRadio}>
-                            <input
-                                type="radio"
-                                name="view-or-add"
-                                value="view"
-                                checked={this.state.selectedOption === 'view'}
-                                className="form-check-input"
-                                onChange={this.handleOptionChange}
-                            />
-                            View
-                        </label>
-                        <label style={styles.addViewRadio}>
-                            <input
-                                type="radio"
-                                name="view-or-add"
-                                value="add"
-                                checked={this.state.selectedOption === 'add'}
-                                className="form-check-input"
-                                onChange={this.handleOptionChange}
-                            />
-                            Add
-                        </label>
+                    <label style={styles.addViewRadio} className="radio-inline">
+                        <input
+                            type="radio"
+                            name="view-or-add"
+                            value="view"
+                            checked={this.state.selectedOption === 'view'}
+                            className="form-check-input"
+                            onChange={this.handleOptionChange}
+                        />
+                        View
+                    </label>
+                    <label style={styles.addViewRadio} className="radio-inline">
+                        <input
+                            type="radio"
+                            name="view-or-add"
+                            value="add"
+                            checked={this.state.selectedOption === 'add'}
+                            className="form-check-input"
+                            onChange={this.handleOptionChange}
+                        />
+                        Add
+                    </label>
                     <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
-                    <select style={{padding: '10px'}} value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
+                    <select style={{padding: '10px', width: '25%', display: 'inline'}} className="form-control" value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
                         <option value="locations">Location</option>
                         {/* <option value="games">Game</option> */}
                         <option value="players">Player</option>
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
                     </select>  
-                    <input type="submit" value="Go" style={{marginLeft: '10px'}}/>
-                    <input type="button" value="Clear Table"  style={{marginLeft: '10px'}} onClick={this.clearTable}/>      
+                    <input type="submit" className="btn btn-success" value="Go" style={{marginLeft: '10px'}}/>
+                    <input type="button" className="btn btn-danger" value="Clear Table"  style={{marginLeft: '10px'}} onClick={this.clearTable}/>      
                 </form>
                 <br />
                 { this.state.isLoading ? <Spinner /> : this.state.error ? <p>Uh oh.  Something went wrong.  Try again.</p> : dataGrid }
