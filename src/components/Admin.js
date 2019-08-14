@@ -222,6 +222,17 @@ class Admin extends Component {
         });
     }
 
+    // TODO: adapt for my setup to go with other changes below
+    // onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
+    //     this.setState(state => {
+    //       const rows = this.state.rows.slice();
+    //       for (let i = fromRow; i <= toRow; i++) {
+    //         rows[i] = { ...rows[i], ...updated };
+    //       }
+    //       return { rows };
+    //     });
+    //   };
+
     render() {
         const inputs = this.state.formFields ? 
                 this.state.formFields.map((field, idx) => 
@@ -237,7 +248,7 @@ class Admin extends Component {
             : null;
 
         const columns = this.state.formFields ?
-            this.state.formFields.map(field => ({ key: field, name: field })) : [];
+            this.state.formFields.map(field => ({ key: field, name: field, editable: true })) : [];
         const rows = this.state.data ? this.checkForAndConvertBooleans(this.state.data) : [];
         const rowsCount = this.state.data ? this.state.data.length : 0;
         const dataGrid = (this.state.formFields && this.state.data && this.state.type !== 'games') ? 
@@ -246,6 +257,8 @@ class Admin extends Component {
                     columns={columns}
                     rowGetter={i => rows[i]}
                     rowsCount={rowsCount}
+                    onGridRowsUpdated={this.onGridRowsUpdated}
+                    enableCellSelect={true}
                 />
             </div> 
             : null;
