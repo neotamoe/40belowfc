@@ -178,7 +178,7 @@ class GameForm extends Component {
                     </div>
 
 
-                    <button type="submit" class="btn btn-success">Add Game</button>
+                    <button type="submit" className="btn btn-success">Add Game</button>
                 </form>
             </div>
         );
