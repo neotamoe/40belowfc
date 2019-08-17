@@ -222,28 +222,46 @@ class Admin extends Component {
         });
     }
 
-    // TODO: adapt for my setup to go with other changes below
-    // onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
-    //     this.setState(state => {
-    //       const rows = this.state.rows.slice();
-    //       for (let i = fromRow; i <= toRow; i++) {
-    //         rows[i] = { ...rows[i], ...updated };
-    //       }
-    //       return { rows };
-    //     });
-    //   };
+    onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
+        const updatedCell = updated;
+        const updatedCellKey = Object.keys(updatedCell)[0]
+        const updatedCellValue = updatedCell[updatedCellKey]
+        const objectToUpdate = this.state.data.slice(fromRow,fromRow+1)[0];
+        const keys = Object.keys(objectToUpdate)
+        for (const key of keys) {
+            if(key===updatedCellKey){
+                objectToUpdate[key] = updatedCellValue
+            }
+        }
+        fetch('http://localhost:8080/'+this.state.type+'/'+objectToUpdate.id, {  
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: 'PUT',  
+            body: JSON.stringify(objectToUpdate),
+        })
+        .then(function (response) {  
+          console.log('Request response: ', response);  
+        }) 
+        .catch(function (error) {  
+          console.log('Request failure: ', error);  
+        });
+        // TODO: update this.state.data so table itself updates and not just in db
+    };
 
     render() {
         const inputs = this.state.formFields ? 
                 this.state.formFields.map((field, idx) => 
-                    <div><label htmlFor={field}>{field.toUpperCase()}: </label>
+                    <div key={idx}>
+                        <label htmlFor={field}>{field.toUpperCase()}: </label>
                         <input
                             type="text"
-                            key={idx}
                             name={field}
                             value={this.state.field === true ? "true" : this.state.field === false ? "false" : this.state.field }
                             onChange={this.handleAddViewInputChange}
-                    /><br /></div>
+                        />
+                        <br />
+                    </div>
                 )
             : null;
 
