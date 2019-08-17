@@ -43,7 +43,7 @@ class Admin extends Component {
     handleSubmit(event) {
         this.setState({
             isLoading: true
-        })
+        });
         event.preventDefault();
         fetch('http://localhost:8080/' + this.state.type)
             .then((response) => {
@@ -60,7 +60,7 @@ class Admin extends Component {
                 // console.log(Object.keys(results[0]))
                 this.setState({
                     formFields: Object.keys(results[0]),
-                    data: results,
+                    data: results.sort((a,b) => a.id >= b.id ? 1 : -1),
                     isLoading: false,
                 })
             })
@@ -161,10 +161,10 @@ class Admin extends Component {
             method: 'POST',  
             body: JSON.stringify(dataToSubmit),
         })
-        .then(function (data) {  
+        .then( data => {  
           console.log('Request response: ', data);  
         })  
-        .catch(function (error) {  
+        .catch( error => {  
           console.log('Request failure: ', error);  
         });
     }
@@ -214,10 +214,10 @@ class Admin extends Component {
             method: 'POST',  
             body: JSON.stringify(formData),
         })
-        .then(function (data) {  
+        .then( data => {  
           console.log('Request response: ', data);  
         })  
-        .catch(function (error) {  
+        .catch( error => {  
           console.log('Request failure: ', error);  
         });
     }
@@ -240,13 +240,41 @@ class Admin extends Component {
             method: 'PUT',  
             body: JSON.stringify(objectToUpdate),
         })
-        .then(function (response) {  
+        .then( response => {  
           console.log('Request response: ', response);  
+          if(response.ok){
+            // TODO: move this to a function for reusability in handleSubmit
+            this.setState({
+                isLoading: true
+            });
+            fetch('http://localhost:8080/' + this.state.type)
+            .then((response) => {
+                if(response.ok) {
+                    return response;
+                }
+                throw Error(response.statusText)
+            })
+            .then(response => {
+                return response.json()
+            })
+            .then(results => {
+                this.setState({
+                    formFields: Object.keys(results[0]),
+                    data: results.sort((a,b) => a.id >= b.id ? 1 : -1),
+                    isLoading: false,
+                })
+            })
+            .catch(error => {
+                this.setState({
+                    error: true,
+                    isLoading: false
+                })
+            });
+          }
         }) 
-        .catch(function (error) {  
+        .catch( error => {  
           console.log('Request failure: ', error);  
         });
-        // TODO: update this.state.data so table itself updates and not just in db
     };
 
     render() {
@@ -310,7 +338,6 @@ class Admin extends Component {
                     <label htmlFor="datalist" style={{padding: '10px'}}>Select Category:</label>
                     <select style={{padding: '10px', width: '25%', display: 'inline'}} className="form-control" value={this.state.type} name="datalist" id="datalist" form="" onChange={this.handleChange}>                        
                         <option value="locations">Location</option>
-                        {/* <option value="games">Game</option> */}
                         <option value="players">Player</option>
                         <option value="opponents">Opponent</option>
                         <option value="seasons">Season</option>
